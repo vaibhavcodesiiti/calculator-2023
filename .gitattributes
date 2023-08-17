@@ -1,2 +1,88 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+def custom_sin(x, terms):
+    sin_x = 0
+    for n in range(terms):
+        term = ((-1) ** n) * (x ** (2 * n + 1)) / factorial(2 * n + 1)
+        sin_x += term
+    return sin_x
+
+def custom_cos(x, terms):
+    cos_x = 0
+    for n in range(terms):
+        term = ((-1) ** n) * (x ** (2 * n)) / factorial(2 * n)
+        cos_x += term
+    return cos_x
+
+def custom_tan(x, terms):
+    return custom_sin(x, terms) / custom_cos(x, terms)
+
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+def main():
+    print("*CALCULATOR*")
+    print("Select operation:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Exponential")
+    print("6. Trigonometric Operations")
+    print("7. Quit")
+
+    action = int(input("ENTER THE OPERATION NUMBER YOU WANT TO PERFORM: "))
+    
+    if action == 1:
+        add1 = float(input("enter the first number: "))
+        add2 = float(input("enter the second number: "))
+        print("THE SUMMATION IS:", add1 + add2)
+    elif action == 2:
+        sub1 = float(input("enter the first number: "))
+        sub2 = float(input("enter the second number: "))
+        print("THE SUBTRACTION OF THE TWO NUMBERS IS:", sub1 - sub2)
+    elif action ==3:
+        mul1 = float(input("enter first number:"))
+        mul2 = float(input("enter second number:"))
+        print("THE MULTIPLICATION OF THE TWO NUMBERS IS:", mul1-mul2)
+    elif action == 4:
+        div1 = float(input("enter first number:"))
+        div2 = float(input("enter second number:"))
+        if div2 == 0:
+            print("CAN,T BE DIVIDED BY ZERO")
+        else:
+            print("THE DIVISION OF THE TWO NUMBERS IS:", div1/div2)
+    elif action == 5:
+        exp1 = float(input("ENETR THE BASE NUMBER:"))
+        exp2 = float(input("ENTER THE EXPONENT:"))
+        print("THE RESULT:", exp1**exp2)
+    
+
+    elif action == 6:
+        angle_degrees = float(input("Enter an angle in degrees: "))
+        angle_radians = angle_degrees * 3.14159265 / 180.0
+
+        terms = 10  # Number of terms in series
+
+        sine = custom_sin(angle_radians, terms)
+        cosine = custom_cos(angle_radians, terms)
+
+        if abs(cosine) < 1e-10:
+            print("Tangent: Undefined (cosine is close to zero)")
+        else:
+            tangent = custom_tan(angle_radians, terms)
+            print(f"Tangent: {tangent:.6f}")
+
+        print(f"Angle: {angle_degrees} degrees")
+        print(f"Sine: {sine:.6f}")
+        print(f"Cosine: {cosine:.6f}")
+    
+    elif action == 7:
+        print("QUITTING.......")
+    else:
+        print("WRONG INPUT DETECTED")
+
+    print("THANK YOU FOR USING")
+
+if __name__ == "__main__":
+    main()
